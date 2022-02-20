@@ -71,4 +71,4 @@ VOLUME ["/data"]
 VOLUME ["/etc/openmediavault"]
 
 # Command
-CMD ["/etc/init.d/entrypoint.sh"]
+ENTRYPOINT ["/etc/init.d/entrypoint.sh"]
