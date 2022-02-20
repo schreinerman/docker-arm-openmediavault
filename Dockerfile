@@ -28,8 +28,8 @@ COPY "./init.d/*" /etc/init.d/
 #RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 
 # Add OMV repo
-RUN echo "deb http://packages.openmediavault.org/public erasmus main" | sudo tee -a /etc/apt/sources.list.d/openmediavault.list && \
-  wget -O - http://packages.openmediavault.org/public/archive.key | apt-key add -
+RUN echo "deb http://packages.openmediavault.org/public erasmus main" | sudo tee -a /etc/apt/sources.list.d/openmediavault.list 
+RUN wget -O - http://packages.openmediavault.org/public/archive.key | apt-key add -
 
 # Install OMV
 RUN apt-get update && apt-get install openmediavault
