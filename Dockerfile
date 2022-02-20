@@ -24,18 +24,30 @@ ENV VERSION $IOEXPERT_DOCKER_ARM_OPENMEDIAVAULT_VERSION
 #copy init.d files
 COPY "./init.d/*" /etc/init.d/
 
+#init atitude
+RUN apt-get update  \
+    && apt-get install wget \
+    && wget https://archive.raspbian.org/raspbian.public.key -O - | apt-key add - \
+    && echo 'deb http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi' | tee -a /etc/apt/sources.list \
+    && wget -O - http://archive.raspberrypi.org/debian/raspberrypi.gpg.key | apt-key add - \
+    && echo 'deb http://archive.raspberrypi.org/debian/ stretch main ui' | tee -a /etc/apt/sources.list.d/raspi.list \
+    && apt-get update
+
+#install requirements
+RUN apt-get install php
+
 # Workaround for resolvconf issue
-#RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
+RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 
 # Add OMV repo
-RUN echo "deb http://packages.openmediavault.org/public erasmus main" | sudo tee -a /etc/apt/sources.list.d/openmediavault.list 
-RUN wget -O - http://packages.openmediavault.org/public/archive.key | apt-key add -
+RUN echo "deb http://packages.openmediavault.org/public usul main" | tee -a /etc/apt/sources.list.d/openmediavault.list && \
+  wget -O - http://packages.openmediavault.org/public/archive.key | apt-key add -
 
 # Install OMV
 RUN apt-get update && apt-get install openmediavault
 
 # Install OMV Extras
-RUN sudo wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | sudo bash
+RUN wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | bash
 
 #clean-up
 RUN rm -rf /tmp/* \
