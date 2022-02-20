@@ -24,6 +24,8 @@ ENV VERSION $IOEXPERT_DOCKER_ARM_OPENMEDIAVAULT_VERSION
 #copy init.d files
 COPY "./init.d/*" /etc/init.d/
 
+RUN [ "cross-build-start" ]
+
 #init atitude
 RUN apt-get update  \
     && apt-get install wget \
@@ -55,6 +57,8 @@ RUN rm -rf /tmp/* \
  && apt autoremove \
  && apt upgrade \
  && rm -rf /var/lib/apt/lists/*
+ 
+RUN [ "cross-build-end" ]
 
 EXPOSE 22 80 443
 
