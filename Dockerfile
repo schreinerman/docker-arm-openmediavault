@@ -26,6 +26,8 @@ COPY "./init.d/*" /etc/init.d/
 
 RUN [ "cross-build-start" ]
 
+RUN chmod +x /etc/init.d/entrypoint.sh
+
 #init atitude
 RUN apt-get update  \
     && apt-get install wget \
@@ -69,4 +71,4 @@ VOLUME ["/data"]
 VOLUME ["/etc/openmediavault"]
 
 # Command
-CMD ["/bin/bash"]
+CMD ["/etc/init.d/entrypoint.sh"]

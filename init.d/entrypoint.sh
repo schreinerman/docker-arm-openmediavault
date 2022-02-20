@@ -13,12 +13,10 @@ term_handler() {
 # on callback, stop all started processes in term_handler
 trap 'kill ${!}; term_handler' SIGINT SIGKILL SIGTERM SIGQUIT SIGTSTP SIGSTOP SIGHUP
 
-echo "starting ssh ..."
-sudo /etc/init.d/ssh start
+#echo "starting ssh ..."
+#sudo /etc/init.d/ssh start
 
-echo "starting openPLC ..."
-cd /OpenPLC_v3
-sudo ./start_openplc.sh
+echo "starting OMV ..."
 
 # wait forever not to exit the container
 while true
