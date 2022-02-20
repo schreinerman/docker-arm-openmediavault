@@ -49,7 +49,7 @@ RUN echo "deb http://packages.openmediavault.org/public usul main" | tee -a /etc
 RUN apt-get update && apt-get install openmediavault
 
 # Install OMV Extras
-RUN wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | bash
+# RUN wget -O - https://github.com/OpenMediaVault-Plugin-Developers/installScript/raw/master/install | bash
 
 #clean-up
 RUN rm -rf /tmp/* \
