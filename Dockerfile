@@ -25,7 +25,7 @@ ENV VERSION $IOEXPERT_DOCKER_ARM_OPENMEDIAVAULT_VERSION
 COPY "./init.d/*" /etc/init.d/
 
 # Workaround for resolvconf issue
-RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
+#RUN echo "resolvconf resolvconf/linkify-resolvconf boolean false" | debconf-set-selections
 
 # Add OMV repo
 RUN echo "deb http://packages.openmediavault.org/public erasmus main" | sudo tee -a /etc/apt/sources.list.d/openmediavault.list && \
